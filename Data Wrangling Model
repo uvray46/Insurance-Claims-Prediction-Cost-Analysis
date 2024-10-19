@@ -1,0 +1,88 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+
+# Load Data
+data_synthetic_path = r'C:\Users\jwhit\OneDrive\Documents\Data Science Course\Capstone 3 Project\data_synthetic.csv'
+insurance_claims_path = r'C:\Users\jwhit\OneDrive\Documents\Data Science Course\Capstone 3 Project\insurance_claims.csv'
+case_study_path = r'C:\Users\jwhit\OneDrive\Documents\Data Science Course\Capstone 3 Project\Worksheet in Case Study question 2.xlsx'
+
+data_synthetic = pd.read_csv(data_synthetic_path)
+insurance_claims = pd.read_csv(insurance_claims_path)
+case_study = pd.read_excel(case_study_path, sheet_name=None)  # Loading all sheets
+
+# Display summaries
+print("Data_Synthetic Info:")
+data_synthetic.info()
+print(data_synthetic.head())
+
+print("\nInsurance_Claims Info:")
+insurance_claims.info()
+print(insurance_claims.head())
+
+# Step 1: Check the merge keys and clean them if needed
+# Trim any whitespace from the keys and convert to string if not already
+data_synthetic['Customer ID'] = data_synthetic['Customer ID'].astype(str).str.strip()
+insurance_claims['policy_number'] = insurance_claims['policy_number'].astype(str).str.strip()
+
+# Preview some merge keys to ensure they are consistent
+print("\nSample Customer IDs in data_synthetic:", data_synthetic['Customer ID'].head())
+print("Sample policy_numbers in insurance_claims:", insurance_claims['policy_number'].head())
+
+# Step 2: Perform a left join to diagnose merging issues
+merged_data = pd.merge(data_synthetic, insurance_claims, left_on='Customer ID', right_on='policy_number', how='left')
+
+# Check for rows that did not match (i.e., are missing data from the right dataset)
+missing_in_right = merged_data[merged_data['policy_number'].isna()]
+print(f"\nNumber of rows in data_synthetic that did not match with insurance_claims: {len(missing_in_right)}")
+
+# Step 3: Handle cases where no data matched
+if len(missing_in_right) > 0:
+    print("The following Customer IDs did not match any policy numbers in insurance_claims:")
+    print(missing_in_right['Customer ID'].head())
+
+# Step 4: Drop columns with all missing values after merging
+merged_data_clean = merged_data.dropna(axis=1, how='all')
+
+# Save the processed data
+output_dir = r'C:\Users\jwhit\OneDrive\Documents\Data Science Course\Capstone 3 Project\Processed_Capstone3_Data'
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+def save_file(data, filename, output_dir):
+    filepath = os.path.join(output_dir, filename)
+    data.to_csv(filepath, index=False)
+
+save_file(merged_data_clean, 'Merged_Processed_Data.csv', output_dir)
+
+print("Data wrangling completed. Cleaned data saved for future analysis.")
+
+# Basic statistics after cleaning
+print("\nBasic statistics of the cleaned merged data:")
+print(merged_data_clean.describe())
+
+# Validation Plots
+
+# Correlation heatmap for numerical data
+# Filter the merged dataset to include only numeric columns
+numeric_data = merged_data_clean.select_dtypes(include=[float, int])
+
+if not numeric_data.empty:
+    plt.figure(figsize=(12, 10))
+    sns.heatmap(numeric_data.corr(), annot=True, fmt=".2f", cmap='coolwarm')
+    plt.title('Correlation Heatmap of Merged Data')
+    plt.show()
+else:
+    print("No numeric data available for correlation heatmap.")
+
+# Distribution plot for the target variable (e.g., total_claim_amount)
+if 'total_claim_amount' in merged_data_clean.columns:
+    plt.figure(figsize=(10, 6))
+    sns.histplot(merged_data_clean['total_claim_amount'].dropna(), bins=30, kde=True)
+    plt.title('Distribution of Total Claim Amount')
+    plt.xlabel('Total Claim Amount')
+    plt.ylabel('Frequency')
+    plt.show()
+else:
+    print("Column 'total_claim_amount' not found in the merged data.")
