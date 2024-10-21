@@ -1,0 +1,98 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import scale
+
+# Set up plotting style
+plt.style.use('ggplot')
+
+# Load Data
+data_path = r'C:\Users\jwhit\OneDrive\Documents\Data Science Course\Capstone 3 Project\Processed_Capstone3_Data\Merged_Processed_Data.csv'
+merged_data_clean = pd.read_csv(data_path)
+
+# Step 1: Descriptive Statistics
+# Descriptive statistics for numerical features
+numerical_summary = merged_data_clean.describe()
+print("\nDescriptive Statistics - Numerical Features:")
+print(numerical_summary)
+
+# Frequency distributions for categorical features
+categorical_columns = merged_data_clean.select_dtypes(include=['object']).columns
+print("\nFrequency Distributions - Categorical Features:")
+for col in categorical_columns:
+    print(f"\n{col} value counts:")
+    print(merged_data_clean[col].value_counts())
+
+# Step 2: Univariate Analysis
+# Histograms for numerical variables
+plt.figure(figsize=(12, 10))
+merged_data_clean.select_dtypes(include=[float, int]).hist(bins=20, edgecolor='black', alpha=0.75, figsize=(12, 10))
+plt.suptitle('Distribution of Numerical Features', y=1.02)
+plt.tight_layout(pad=2.0)
+plt.show()
+
+# Bar plots for categorical variables
+for col in categorical_columns:
+    plt.figure(figsize=(10, 6))
+    sns.countplot(data=merged_data_clean, x=col, order=merged_data_clean[col].value_counts().index)
+    plt.title(f'Count of {col}')
+    plt.xlabel(col)
+    plt.ylabel('Count')
+    plt.xticks(rotation=45)
+    plt.show()
+
+# Step 3: Bivariate Analysis
+# Scatter plots for numerical features against total_claim_amount
+if 'total_claim_amount' in merged_data_clean.columns:
+    for col in merged_data_clean.select_dtypes(include=[float, int]).columns:
+        if col != 'total_claim_amount':
+            plt.figure(figsize=(10, 6))
+            sns.scatterplot(data=merged_data_clean, x=col, y='total_claim_amount')
+            plt.title(f'Total Claim Amount vs. {col}')
+            plt.xlabel(col)
+            plt.ylabel('Total Claim Amount')
+            plt.grid(True)
+            plt.show()
+
+# Box plots for numerical variables to detect outliers
+for col in merged_data_clean.select_dtypes(include=[float, int]).columns:
+    plt.figure(figsize=(10, 6))
+    sns.boxplot(x=merged_data_clean[col])
+    plt.title(f'Boxplot for {col}')
+    plt.xlabel(col)
+    plt.grid(True)
+    plt.show()
+
+# Pair plot to explore pairwise relationships
+numerical_columns = merged_data_clean.select_dtypes(include=[float, int]).columns
+sns.pairplot(merged_data_clean[numerical_columns].dropna())
+plt.suptitle('Pairwise Relationships between Numerical Features', y=1.02)
+plt.show()
+
+# Step 4: Correlation Analysis
+# Correlation heatmap for numerical features
+numeric_data = merged_data_clean.select_dtypes(include=[float, int])
+if not numeric_data.empty:
+    plt.figure(figsize=(12, 10))
+    sns.heatmap(numeric_data.corr(), annot=True, cmap='coolwarm', vmin=-1, vmax=1)
+    plt.title('Correlation Heatmap of Numerical Features')
+    plt.show()
+else:
+    print("No numeric data available for correlation heatmap.")
+
+# Step 5: PCA for Dimensionality Reduction
+# Scale the numerical data
+scaled_data = scale(numeric_data.dropna())
+
+# Perform PCA
+pca = PCA().fit(scaled_data)
+plt.figure(figsize=(10, 6))
+plt.plot(np.cumsum(pca.explained_variance_ratio_), marker='o', linestyle='-')
+plt.title('Cumulative Variance Explained by PCA Components')
+plt.xlabel('Number of Components')
+plt.ylabel('Cumulative Variance Explained')
+plt.grid(True)
+plt.show()
+
