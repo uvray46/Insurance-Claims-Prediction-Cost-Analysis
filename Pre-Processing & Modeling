@@ -1,0 +1,74 @@
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Step 1: Load the dataset
+file_path = r"C:\Users\jwhit\OneDrive\Documents\Data Science Course\Capstone 3 Project\Processed_Capstone3_Data\Merged_Processed_Data.csv"
+data_df = pd.read_csv(file_path)
+
+# Display the first few rows
+print("Dataset Preview:\n", data_df.head())
+
+# Step 2: Handle missing values
+missing_values = data_df.isnull().sum()
+print("Missing values in each column:\n", missing_values)
+
+# Fill missing numeric values with the median
+data_df.fillna(data_df.median(numeric_only=True), inplace=True)
+
+# Fill missing categorical values with the mode
+for col in data_df.select_dtypes(include='object').columns:
+    mode_value = data_df[col].mode()[0]  # Get the mode of the column
+    data_df[col] = data_df[col].fillna(mode_value)  # Fill missing values
+
+# Step 3: Encode categorical variables
+label_encoder = LabelEncoder()
+binary_columns = ['Gender', 'Marital Status', 'Preferred Language']  # Example columns
+for col in binary_columns:
+    data_df[col] = label_encoder.fit_transform(data_df[col])
+
+# One-Hot Encoding for multi-class categorical columns
+data_df = pd.get_dummies(data_df, columns=['Occupation', 'Education Level', 'Policy Type'], drop_first=True)
+
+# Step 4: Feature scaling
+numeric_cols = ['Age', 'Income Level', 'Location', 'Premium Amount', 'Deductible', 'Credit Score']
+scaler = StandardScaler()
+data_df[numeric_cols] = scaler.fit_transform(data_df[numeric_cols])
+
+# Step 5: Split the data into training and testing sets
+X = data_df.drop(columns=['total_claim_amount', 'Customer ID'])  # Exclude target and irrelevant columns
+y = data_df['total_claim_amount']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+#Ensuring all features are numeric
+X_train = X_train.apply(pd.to_numeric, errors='coerce')
+X_test = X_test.apply(pd.to_numeric, errors='coerce')
+
+# Dropping any columns that still contain non-numeric values
+X_train = X_train.dropna(axis=1)
+X_test = X_test.dropna(axis=1)
+
+# Verify the updated feature set
+print("Features after ensuring numerical data:\n", X_train.dtypes)
+
+# Step 6: Modeling
+model = RandomForestRegressor(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = model.predict(X_test)
+# Evaluate the model
+rmse = mean_squared_error(y_test, y_pred, squared=False)
+r2 = r2_score(y_test, y_pred)
+print(f"RMSE: {rmse}")
+print(f"R² Score: {r2}")
+
+# Step 7: Feature Importance Analysis
+# Make sure to use X_train columns since some features may have been dropped
+feature_importances = pd.Series(model.feature_importances_, index=X_train.columns)
+feature_importances = feature_importances.sort_values(ascending=False)
+
+# Display the top features influencing the claim amount
+print("Top features influencing the claim amount:\n", feature_importances.head(10))
