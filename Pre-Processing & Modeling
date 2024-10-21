@@ -72,3 +72,13 @@ feature_importances = feature_importances.sort_values(ascending=False)
 
 # Display the top features influencing the claim amount
 print("Top features influencing the claim amount:\n", feature_importances.head(10))
+
+# Plotting the feature importance as a bar chart
+plt.figure(figsize=(10, 6))
+feature_importances.head(10).plot(kind='bar', color='skyblue')
+plt.title('Top 10 Features Influencing the Claim Amount')
+plt.xlabel('Features')
+plt.ylabel('Importance Score')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
