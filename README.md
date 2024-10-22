@@ -16,18 +16,22 @@ This project examines various economic and demographic factors affecting insuran
 3. How can insights into claim cost drivers inform better claims handling and pricing strategies for insurers?
 
 ## Datasets
-Primary Dataset: Insurance_Claims.csv
-Description: This dataset contains detailed information on insurance claims, including:
+**Primary Dataset:** Insurance_Claims.csv
 
-Policy Details: Coverage amount, deductible, policy state.
-Customer Information: Age, demographics, income level.
-Claims Breakdown: Total claim amount, injury claims, property claims.
-Other Attributes: Fraud status, incident details.
-Relevance: This dataset serves as the foundation for building the predictive model, as it contains the target variable (total claim amount) and numerous features for analysis.
+**Description:** This dataset contains detailed information on insurance claims, including:
 
-Secondary Dataset: Case Study Worksheet
-Description: Contains supplementary financial or scenario-specific data that may help validate the predictive model's performance and refine the analysis.
-Relevance: Provides additional context for evaluating model predictions against real-world scenarios.
+* **Policy Details:** Coverage amount, deductible, policy state.
+* **Customer Information:** Age, demographics, income level.
+* **Claims Breakdown:** Total claim amount, injury claims, property claims.
+* **Other Attributes:** Fraud status, incident details.
+* **Relevance:** This dataset serves as the foundation for building the predictive model, as it contains the target variable (total claim amount) and numerous features for analysis.
+
+**Secondary Dataset:** Case Study Worksheet
+
+**Description:** Contains supplementary financial or scenario-specific data that may help validate the predictive model's performance and refine the analysis.
+
+* **Relevance:** Provides additional context for evaluating model predictions against real-world scenarios.
+
 [Insert a table summarizing the datasets, their size, and key variables here.]
 
 ## Major Insights
@@ -107,7 +111,7 @@ This research highlights the key economic and demographic factors influencing in
 2. **Secondary Dataset: Case Study Worksheet**
 
 * **Insurance Fraud Detection** - Sourced from Kaggle, this dataset includes data related to insurance fraud detection. Although not used in the final analysis, it was considered for supplementary validation.
-* **Link:* [Kaggle](https://www.kaggle.com/datasets/arpan129/insurance-fraud-detection)
+* **Link:** [Kaggle](https://www.kaggle.com/datasets/arpan129/insurance-fraud-detection)
 
 
 ## Appendix: Code and Data
