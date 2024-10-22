@@ -39,33 +39,31 @@ This project examines various economic and demographic factors affecting insuran
 
 ## Major Insights
 ### Insight 1: Key Predictors of Claim Amounts
-**Narrative:** Certain factors, such as "Premium Amount," "Income Level," and "Location," emerged as strong predictors of insurance claim costs. Understanding these key drivers allows insurers to adjust policies and manage risk more effectively.
+**Narrative:** The feature importance analysis identified certain variables as the most influential in predicting insurance claim amounts. This insight highlights which factors have the greatest impact, allowing insurers to prioritize these variables when assessing risks and pricing policies.
 
 **Key Findings:**
-"Premium Amount" is the most significant factor, accounting for 34.8% of the total influence on claim predictions.
-Other important factors include "Income Level" (7.6%) and "Coverage Amount" (7.5%), suggesting that financial characteristics play a substantial role in determining claim sizes.
-Geographic factors like "Location" (7.5%) also influence claims, likely due to regional variations in service costs.
+* "Premium Amount" emerged as the most significant predictor, accounting for approximately 34.8% of the model's importance scores. This indicates that the amount paid by policyholders for coverage is strongly correlated with claim costs.
+* Other important predictors include "Income Level" (7.6%), "Coverage Amount" (7.5%), and "Location" (7.5%). This suggests that financial characteristics and regional factors play substantial roles in determining claim amounts.
+* "Credit Score" (7.1%) also showed significant importance, implying that customers with different credit histories may exhibit varying levels of risk.
 
 ![Top 10 Features](https://github.com/user-attachments/assets/b82f44f9-b5e6-45db-8875-59e3265c4aab)
 
 
 ### Insight 2: The Role of Financial Characteristics in Claims
-**Narrative:** Higher income levels and larger coverage amounts were associated with larger claims. Policies with lower deductibles tended to see higher claim payouts, indicating that financial characteristics significantly impact claims.
+**Narrative:** While the relationship between deductibles and claim sizes did not yield meaningful insights due to imputed values, we can still draw conclusions based on the impact of premiums and coverage amounts. The importance of these variables suggests that policyholders with higher premiums and coverage limits tend to have higher claim costs.
 
 **Key Findings:**
-Lower deductibles were linked to higher claims, suggesting that policyholders are more likely to file claims when out-of-pocket expenses are minimized.
-The model indicated that credit scores, while not the top predictor, still influenced claim amounts, hinting at risk behavior associated with financial history.
-
-
+* The "Premium Amount" being the top predictor aligns with the expectation that higher premiums, which often indicate higher coverage levels or risk, are associated with larger claims.
+* "Coverage Amount" also shows that policies with larger coverage amounts are correlated with higher claim payouts, reflecting the higher financial exposure insurers face when offering more extensive coverage.
 
 ### Insight 3: Geographic Variations in Claim Costs
-**Narrative:** Location emerged as a key predictor, with certain regions exhibiting higher average claim costs. This finding suggests that regional pricing strategies may be beneficial for insurers.
+**Narrative:** The correlation heatmap provided insights into how different numerical features relate to each other. Identifying correlated features can help refine the model and improve the accuracy of predictions.
 
 **Key Findings:**
-Claims in high-cost regions tended to be larger, possibly due to differences in medical, repair, or labor costs.
-The analysis identified clustering patterns in geographic data, which could help inform regional pricing or risk assessment strategies.
+* There were noticeable correlations between financial features such as "Premium Amount," "Coverage Amount," and "Income Level." These relationships suggest that individuals with higher income levels are likely to choose policies with higher premiums and coverage amounts.
+* Some weaker correlations between other features suggest potential interactions that could be further explored in future modeling (e.g., "Credit Score" and "Claim History").
 
-[Include a map visualization to illustrate geographic variations in claim amounts.]
+![Correlation Heatmap](https://github.com/user-attachments/assets/7d15f10a-1abf-44ac-9cee-1153ba1095f0)
 
 ## Methodology
 ### Data Pre-Processing
@@ -73,21 +71,10 @@ The analysis identified clustering patterns in geographic data, which could help
 **Encoding Categorical Variables:** Applied label encoding to binary categories and one-hot encoding to multi-class variables.
 **Feature Scaling:** Standardized numeric features using StandardScaler.
 
-### Model Development
-**Random Forest Regressor:** Chosen for its ability to handle non-linear relationships and determine feature importance.
-**Evaluation Metrics:** Used RMSE and R² to measure model accuracy and explained variance.
-
-[Insert a flowchart or diagram depicting the steps in the data processing and modeling workflow.]
-
 ## Model Performance
 ### Evaluation Metrics
 **Root Mean Squared Error (RMSE):** 7585.46
 **R² Score:** 0.27
-
-## Predictive Accuracy
-The model demonstrated reasonable accuracy in forecasting insurance claim amounts, with financial and policy-related factors emerging as the strongest predictors.
-
-[Add a plot here comparing actual vs. predicted claim amounts to illustrate model performance.]
 
 ## Implications
 ### For Risk Management and Policy Pricing
@@ -99,7 +86,9 @@ The model demonstrated reasonable accuracy in forecasting insurance claim amount
 Regional variations in claim costs indicate that insurers can benefit from location-based adjustments to premiums and coverage options.
 
 ## Conclusion
-This research highlights the key economic and demographic factors influencing insurance claim amounts, providing a foundation for predictive modeling and strategic insights. The findings demonstrate that financial attributes, policy characteristics, and regional factors play significant roles in determining claim costs.
+This study developed a predictive model to forecast insurance claim amounts and identified the main factors influencing claim costs. The analysis revealed that Premium Amount, Income Level, Coverage Amount, and Location are the most significant predictors, emphasizing the importance of financial characteristics and policy details in determining claim sizes. The Premium Amount emerged as the top factor, suggesting that pricing strategies should closely reflect the relationship between premiums and expected claim costs.
+
+The model demonstrated reasonable accuracy in predicting claim amounts, supporting the use of data-driven approaches for pricing optimization and risk management. Correlation analysis also highlighted relationships among financial features, which can inform further model refinement. While the imputation of the "Total Claim Amount" may have impacted some insights, the findings provide a solid foundation for improving claims handling and pricing strategies.
 
 ## Future Directions
 **Explore Advanced Models:** Consider models like Gradient Boosting or Neural Networks for potentially improved accuracy.
