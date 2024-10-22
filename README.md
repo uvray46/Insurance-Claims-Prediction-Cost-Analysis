@@ -35,7 +35,7 @@ This project examines various economic and demographic factors affecting insuran
 * **Fraud Indicator:** Whether the claim was marked as fraudulent or not.
 * **Relevance:** Provides additional context for evaluating model predictions against real-world scenarios.
 
-[Insert a table summarizing the datasets, their size, and key variables here.]
+![Datasets Table](https://github.com/user-attachments/assets/449ec104-4a96-475b-afdb-fa49cbfc3885)
 
 ## Major Insights
 ### Insight 1: Key Predictors of Claim Amounts
@@ -46,7 +46,8 @@ This project examines various economic and demographic factors affecting insuran
 Other important factors include "Income Level" (7.6%) and "Coverage Amount" (7.5%), suggesting that financial characteristics play a substantial role in determining claim sizes.
 Geographic factors like "Location" (7.5%) also influence claims, likely due to regional variations in service costs.
 
-[Include a bar chart here visualizing the feature importance to highlight the top predictors.]
+![Top 10 Features](https://github.com/user-attachments/assets/b82f44f9-b5e6-45db-8875-59e3265c4aab)
+
 
 ### Insight 2: The Role of Financial Characteristics in Claims
 **Narrative:** Higher income levels and larger coverage amounts were associated with larger claims. Policies with lower deductibles tended to see higher claim payouts, indicating that financial characteristics significantly impact claims.
@@ -55,7 +56,7 @@ Geographic factors like "Location" (7.5%) also influence claims, likely due to r
 Lower deductibles were linked to higher claims, suggesting that policyholders are more likely to file claims when out-of-pocket expenses are minimized.
 The model indicated that credit scores, while not the top predictor, still influenced claim amounts, hinting at risk behavior associated with financial history.
 
-[Include a scatter plot or box plot showing relationships between deductible amounts and claim sizes.]
+
 
 ### Insight 3: Geographic Variations in Claim Costs
 **Narrative:** Location emerged as a key predictor, with certain regions exhibiting higher average claim costs. This finding suggests that regional pricing strategies may be beneficial for insurers.
@@ -80,8 +81,8 @@ The analysis identified clustering patterns in geographic data, which could help
 
 ## Model Performance
 ### Evaluation Metrics
-**Root Mean Squared Error (RMSE):** [Include the calculated value here].
-**R² Score:** [Include the calculated value here].
+**Root Mean Squared Error (RMSE):** 7585.46
+**R² Score:** 0.27
 
 ## Predictive Accuracy
 The model demonstrated reasonable accuracy in forecasting insurance claim amounts, with financial and policy-related factors emerging as the strongest predictors.
