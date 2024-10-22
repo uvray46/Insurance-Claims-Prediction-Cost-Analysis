@@ -67,14 +67,16 @@ This project examines various economic and demographic factors affecting insuran
 
 ## Methodology
 ### Data Pre-Processing
-**Handling Missing Values:** Filled missing numeric values with the median and categorical values with the mode.
-**Encoding Categorical Variables:** Applied label encoding to binary categories and one-hot encoding to multi-class variables.
-**Feature Scaling:** Standardized numeric features using StandardScaler.
+* Cleaned the data by handling missing values, removing duplicates, and standardizing numeric features.
+* Applied label encoding for binary categories and one-hot encoding for multi-class variables.
 
-## Model Performance
-### Evaluation Metrics
-**Root Mean Squared Error (RMSE):** 7585.46
-**R² Score:** 0.27
+### Exploratory Data Analysis (EDA):
+* Conducted descriptive statistics, univariate analysis (histograms, bar charts), and bivariate analysis (scatter and box plots).
+* Used a correlation heatmap to identify feature relationships and applied PCA to assess dimensionality.
+
+### Model Development:
+* Chose the Random Forest Regressor due to its suitability for non-linear data and feature importance analysis.
+* Split the data into training and testing sets, performed hyperparameter tuning, and evaluated using RMSE and R² metrics.
 
 ## Implications
 ### For Risk Management and Policy Pricing
