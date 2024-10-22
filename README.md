@@ -16,7 +16,7 @@ This project examines various economic and demographic factors affecting insuran
 3. How can insights into claim cost drivers inform better claims handling and pricing strategies for insurers?
 
 ## Datasets
-**Primary Dataset:** Insurance_Claims.csv
+**Primary Dataset:** Insurance Claims
 
 **Description:** This dataset contains detailed information on insurance claims, including:
 
@@ -30,6 +30,9 @@ This project examines various economic and demographic factors affecting insuran
 
 **Description:** Contains supplementary financial or scenario-specific data that may help validate the predictive model's performance and refine the analysis.
 
+* **Policy Information:** Policy state, policy type.
+* **Incident Details:** Type of incident, incident severity.
+* **Fraud Indicator:** Whether the claim was marked as fraudulent or not.
 * **Relevance:** Provides additional context for evaluating model predictions against real-world scenarios.
 
 [Insert a table summarizing the datasets, their size, and key variables here.]
