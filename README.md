@@ -42,7 +42,7 @@ Geographic factors like "Location" (7.5%) also influence claims, likely due to r
 [Include a bar chart here visualizing the feature importance to highlight the top predictors.]
 
 ### Insight 2: The Role of Financial Characteristics in Claims
-Narrative: Higher income levels and larger coverage amounts were associated with larger claims. Policies with lower deductibles tended to see higher claim payouts, indicating that financial characteristics significantly impact claims.
+**Narrative:** Higher income levels and larger coverage amounts were associated with larger claims. Policies with lower deductibles tended to see higher claim payouts, indicating that financial characteristics significantly impact claims.
 
 **Key Findings:**
 Lower deductibles were linked to higher claims, suggesting that policyholders are more likely to file claims when out-of-pocket expenses are minimized.
@@ -50,8 +50,8 @@ The model indicated that credit scores, while not the top predictor, still influ
 
 [Include a scatter plot or box plot showing relationships between deductible amounts and claim sizes.]
 
-Insight 3: Geographic Variations in Claim Costs
-Narrative: Location emerged as a key predictor, with certain regions exhibiting higher average claim costs. This finding suggests that regional pricing strategies may be beneficial for insurers.
+### Insight 3: Geographic Variations in Claim Costs
+**Narrative:** Location emerged as a key predictor, with certain regions exhibiting higher average claim costs. This finding suggests that regional pricing strategies may be beneficial for insurers.
 
 **Key Findings:**
 Claims in high-cost regions tended to be larger, possibly due to differences in medical, repair, or labor costs.
