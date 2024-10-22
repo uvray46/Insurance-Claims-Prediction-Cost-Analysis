@@ -99,7 +99,16 @@ This research highlights the key economic and demographic factors influencing in
 **Incorporate Additional Data Sources:** Include other relevant datasets, such as macroeconomic indicators or lifestyle factors, to enhance predictive capabilities.
 
 ## References
-[Provide references here based on data sources, algorithms used, or relevant research articles.]
+1. **Primary Dataset: Insurance Claims Data**
+
+* **insurance_claims.csv** - This dataset, sourced from Mendeley Data, contains information on individual insurance claims, including policy details, customer demographics, and claim amounts. It serves as the foundation for the predictive modeling in this project.
+* **Link:** [Mendeley Data](https://data.mendeley.com/datasets/992mh7dk9y/2)
+
+2. **Secondary Dataset: Case Study Worksheet**
+
+* **Insurance Fraud Detection** - Sourced from Kaggle, this dataset includes data related to insurance fraud detection. Although not used in the final analysis, it was considered for supplementary validation.
+* **Link:* [Kaggle](https://www.kaggle.com/datasets/arpan129/insurance-fraud-detection)
+
 
 ## Appendix: Code and Data
 
